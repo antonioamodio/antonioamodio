@@ -1,0 +1,73 @@
+.home {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    @include size-md(){
+    flex-direction: row;
+    align-items: flex-start;
+    }
+    h1{
+        font-size: $standardSize*3.33;
+        @include size-md(){
+        font-size: $standardSize*7.3;
+        }
+    }
+    p{
+        color: red;
+    }
+
+    .social{
+        display: none;
+        @include size-md(){
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        a{font-weight: 600;}
+        }
+    }
+
+
+    .container{
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+
+        h1.damn{
+            margin-bottom: -5%;
+        }
+
+        .info{
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            @include size-md(){
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
+
+            .slot-info{
+                display: flex;
+                flex-direction: column;
+
+                &.no-mobile{
+                    display: none;
+                    @include size-md(){display: flex;}
+                }
+            }
+        }
+    }
+}
+
+.sticky {
+    height: 50vh;
+    width: 100%;
+    @include size-md(){
+        height:35vh;
+    } 
+}

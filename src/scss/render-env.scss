@@ -1,0 +1,27 @@
+.three-container{
+    position: fixed;
+    top: 0;
+    margin: 0;
+    z-index: -1;
+    canvas{
+        height: 100vh !important;
+        width: 100vw !important;   
+    }
+
+    .loading-screen {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        z-index: 99999;
+        background-color: black;
+        opacity: 1; /* Imposta l'opacità iniziale a 1 */
+        transition: opacity 1s ease; /* Aggiungi una transizione per l'opacità */
+    }
+    
+    &.hidden{
+        .loading-screen {
+        opacity: 0; /* Quando la classe .hidden è aggiunta, rendi l'elemento completamente trasparente */
+        }
+    }
+    
+}

@@ -1,0 +1,27 @@
+@import './variable.scss';
+@import './mixin.scss';
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:5%;
+    width: 90%;
+    position: fixed;
+    background-color: black;
+    @include size-md{
+        background-color: transparent;
+        position: fixed;
+        z-index: 999;
+        width: 62%;
+        padding: 2% 0 0 19%;
+    }
+    a{
+        color: $colorDef;
+        font-size: $standardSize*0.5;
+        mix-blend-mode: difference;
+        text-transform: uppercase;
+        @include size-md{
+            font-size: $standardSize*0.7;
+        }
+    }
+}

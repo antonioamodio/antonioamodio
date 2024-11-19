@@ -1,0 +1,12 @@
+.random-text{
+    p{
+        font-family: $paragraph;
+        color: $colorDef;
+        margin: 0;
+        font-size: $standardSize*0.6;
+        padding: 5%;
+        @include size-md(){
+        font-size: $standardSize*0.8;
+        }
+    }
+}

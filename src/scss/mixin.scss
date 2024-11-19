@@ -1,0 +1,173 @@
+@mixin size-xs {
+    @media (max-width: #{$breakpointSm}) {
+        @content;
+    }
+    }
+    
+    @mixin size-sm {
+    @media (min-width: #{$breakpointSm}) {
+        @content;
+    }
+    }
+    
+    @mixin size-md {
+    @media (min-width: #{$breakpointMd}) {
+        @content;
+    }
+    }
+    
+    @mixin size-lg {
+    @media (min-width: #{$breakpointLg}) {
+        @content;
+    }
+    }
+    
+    @mixin size-xl {
+    @media (min-width: #{$breakpointXl}) {
+        @content;
+    }
+    }
+    
+    
+    @mixin font($weight: regular, $size: m, $lineHeight: 1) {
+        $factor: 0.95;
+        $factorMd: 5;
+        $factorLg: 1.1;
+        $factorXl: 1.15;
+    
+        @if $size == 's' {
+            $factor: 0.7;
+            $factorMd: 0.75;
+            $factorLg: 0.75;
+            $factorXl: 0.70;
+        }
+    
+        @if $size == 'm' {
+            $factor: 1;
+            $factorMd: 1;
+            $factorLg: 1;
+            $factorXl: 1;
+        }
+    
+        @if $size == 'l' {
+            $factor: 1.5;
+            $factorMd: 1.5;
+            $factorLg: 1.5;
+            $factorXl: 1.5;
+        }
+    
+        @if $size == 'xl' {
+            $factor: 2;
+            $factorMd: 2;
+            $factorLg: 2;
+            $factorXl: 2;
+        }
+    
+        @if $size == 'xxl' {
+            $factor: 2.5;
+            $factorMd: 2.5;
+            $factorLg: 2.5;
+            $factorXl: 2.5;
+        }
+    
+        @if $size == 'xxxl' {
+            $factor: 6;
+            $factorMd: 6.1;
+            $factorLg: 6.2;
+            $factorXl: 6.3;
+        }
+    
+        @if $size == 'h5' {
+            $factor: 1.15;
+            $factorMd: 1.25;
+            $factorLg: 1.35;
+            $factorXl: 1.45;
+        }
+    
+        @if $size == 'h4' {
+            $factor: 1.25;
+            $factorMd: 1.35;
+            $factorLg: 1.45;
+            $factorXl: 1.55;
+        }
+    
+        @if $size == 'h3' {
+            $factor: 1.45;
+            $factorMd: 1.55;
+            $factorLg: 1.65;
+            $factorXl: 1.75;
+        }
+    
+        @if $size == 'h2' {
+            $factor: 2;
+            $factorMd: 2.4;
+            $factorLg: 2.5;
+            $factorXl: 2.6;
+        }
+    
+        @if $size == 'h1' {
+            $factor: 2.4;
+            $factorMd: 2.5;
+            $factorLg: 2.6;
+            $factorXl: 2.7;
+        }
+    
+        
+    
+        @if $size != 'custom' {
+            font-size: floor($baseFontSize * $factor);
+    
+            @include size-md {
+            font-size: floor($baseFontSize * $factorMd);
+            }
+    
+            @include size-lg {
+            font-size: floor($baseFontSize * $factorLg);
+            }
+    
+            @include size-xl {
+            font-size: floor($baseFontSize * $factorXl);
+            }
+        }
+    }
+      
+    @mixin setup-flex($justify: '', $align: ''){
+    display: flex;
+    justify-content: center;
+    
+    @if $justify == 'center' {
+        justify-content: center;
+    }
+    @if $justify == 'end' {
+        justify-content:flex-end;
+    }
+    }
+    
+    @mixin setup-container() {
+        padding: $percentageSpacingMd;
+    @include size-md(){
+        padding: $standardSpacing*4;
+        // margin: $percentageSpacingMd;
+    }
+    }
+    
+    @mixin background-image {
+        background-size: cover;
+        background-position: center;
+    }
+    
+    @mixin standard-spacing{
+        padding: 0 5vh;
+    }
+    
+    @mixin effect($effect) {
+        height: 100%;
+        background-color: #D55E2B;
+        mix-blend-mode: $effect;
+    }
+    
+    @mixin background-img{
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }

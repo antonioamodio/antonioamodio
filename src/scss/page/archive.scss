@@ -1,0 +1,42 @@
+.archive{
+
+    .top{
+        padding: $spacing;
+        h1{
+            font-family: $damn;
+            text-align: center;
+            padding-top: 5%;
+            font-size: $standardSize*5;
+        }
+    }   
+    .down{
+        padding: $spacing;
+        padding-top: 0;
+        font-family: $paragraph !important;
+    } 
+
+    .blur {
+        position: fixed;
+        z-index: -1;
+        background: rgba(255, 0, 0, 0.06);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(9.3px);
+        -webkit-backdrop-filter: blur(9.3px);
+        height: 100vh;
+        width: 100vw;
+        opacity: 0; /* Parte nascosto */
+        animation: fadeIn 2s ease forwards; /* Attiva l'animazione */
+    }
+    
+    /* Definisci l'animazione fadeIn */
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    
+    
+}

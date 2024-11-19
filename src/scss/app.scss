@@ -1,0 +1,342 @@
+@import './render-env.scss';
+@import './menu.scss';
+@import './variable.scss';
+@import './table.scss';
+@import './mixin.scss';
+@import './page/archive.scss';
+@import './sections/home.scss';
+@import './sections/about-me.scss';
+@import './random-text.scss';
+// @import url('https://fonts.cdnfonts.com/css/outward');
+@import url('https://fonts.cdnfonts.com/css/dm-sans');
+@import url('https://fonts.cdnfonts.com/css/damn');
+// @import url("https://use.typekit.net/xdr0jma.css");
+
+@font-face {
+    font-family: 'DAMN';
+    src: url('https://fonts.cdnfonts.com/s/XXXXXX/damn.woff2') format('woff2'),
+         url('https://fonts.cdnfonts.com/s/XXXXXX/damn.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'DM Sans';
+    src: url('https://fonts.cdnfonts.com/s/XXXXXX/dm-sans.woff2') format('woff2'),
+         url('https://fonts.cdnfonts.com/s/XXXXXX/dm-sans.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+}
+
+
+body{
+    font-family: 'DAMN', sans-serif;
+    background-color: black;
+}
+body, html{
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+color: $colorDef;
+font-weight: 100;
+margin: 0;
+// &.standard{ font-family: $standard;}
+// &.secondary{ font-family: $secondary;}
+&.damn{ font-family: $damn;}
+}
+
+a{
+    text-decoration: none;
+    font-family: $paragraph;
+    font-weight: 200;
+    color: $colorDef;
+    font-size: $standardSize*0.5;
+    @include size-md{
+        font-size: $standardSize*0.6;
+    }
+}
+p{
+    font-family: $paragraph;
+    margin: 0;
+    font-size: $standardSize*0.6;
+}
+
+.mobile{
+    display: block;
+    @include size-md(){
+        display: none;
+    }
+}
+.no-mobile{
+    display: none;
+    @include size-md(){
+        display: block;
+    }
+}
+
+.only-mobile{
+    @include size-md(){
+        border: 1px solid red;
+        display: none !important;
+    }
+}
+
+.right-mobile{
+    text-align: right;
+    @include size-md(){text-align: inherit;}
+}
+
+.section-standard{
+    height: 100vh;
+
+    .slot-25{
+        height: 100%;
+        width: 15%;
+    }
+
+    h1{
+        text-align: center;
+        padding:0;
+        line-height: 1;
+        display: inline;
+    }
+}
+
+.box-about{
+    margin-bottom: 20vh;
+    padding: 0;
+    .title{
+        flex-direction: column;
+        align-items: center;
+
+        @include size-md(){
+            justify-content: flex-end;
+            flex-direction: inherit;
+            align-items: inherit;
+        }
+        h1{
+            text-align: right;
+            height: 20%;
+        }
+    }
+    .video-mobile{
+        display: flex;
+        width: 100%;
+        @include size-md(){
+            display: none;
+        }
+    }
+    .me{
+        display: none;
+        @include size-md(){
+            display: block;
+        }
+        video{
+            margin-top: -15%;
+        }
+    }
+}
+
+// .title{
+//     display: flex;
+//     padding: $spacing;
+//     position: relative;
+//     h1{
+//         width: 70%;
+//         padding: 0;
+//     }
+//     @include size-md(){
+//         height: 40vh;
+//     }
+// }
+
+.gradient{
+    &#g1{
+        background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+    }
+    &#g2{
+        background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+    }
+    height: 20vh;
+}
+
+
+
+//ABOUT
+
+.me{
+    width: 25%;
+    height: 110vh;
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 2%;
+
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+
+//ARROW
+.arrow{
+    position:fixed;
+    z-index: 999;
+    width:50px;
+    height: 50px;
+    cursor:pointer;
+    transition:0.5s;
+    overflow:hidden;
+    right: 0;
+    bottom: 0;
+    margin: 0 5% 5% 0;
+    transform: rotate(-90deg);
+  }
+  
+  .arrow:hover{
+    border:solid 2px rgb(255, 0, 0); 
+    border-radius:50%;
+  }
+  .arrow:after{
+    position:absolute;
+    display:block;
+    content:"";
+    color:rgb(255, 0, 0);
+    width: 40px;
+    height: 25px;
+    top:-1px;
+    border-bottom:solid 2px;
+    transform:translatex(4px);
+  }
+  .arrow:before{
+    position:absolute;
+    display:block;
+    content:"";
+    color:rgb(255, 0, 0);
+    width: 15px;
+    height: 15px;
+    border-top:solid 2px;
+    border-left:solid 2px;
+    top:50%;
+    left:2px;
+    transform-origin:0% 0%;
+    transform:rotatez(-45deg);
+  
+  }
+  .arrow:hover:after{
+   animation: aniArrow02 1s cubic-bezier(0, 0.6, 1, 0.4) infinite 0.5s;
+  }
+  .rotate {
+    transform: rotate(90deg);
+  }
+  
+  
+  @keyframes borderAni{
+     0% {
+      border:solid 2px rgb(255, 0, 0);
+    }
+    100% {    
+      border:solid 2px rgb(255, 0, 0); 
+      border-radius:50%;
+    }
+  }
+
+//CONTACT BOX
+.box-cont{
+    margin: 0;
+    padding: 0;
+    color: red;
+    position: relative;
+    background: linear-gradient(0deg, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+    display: flex;
+    .slot{
+        width: 50%;
+        background-color: red;
+        margin: 1%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        p{
+            color: black;
+            font-weight: 900;
+            font-size: $standardSize;
+            margin: 0;
+            @include size-md(){
+
+                font-size: $oXL*1.1;
+            }
+        }
+    }
+
+    .title{
+        height: fit-content !important; 
+        justify-content: flex-start;
+        flex-direction: column;
+        width: 50%;
+        h1{
+            // font-family: $secondary;
+            text-align: center;
+            width: auto;
+        }
+        p{
+            margin:0;
+            text-transform: uppercase;
+        }
+        a{
+            color: red;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+    }
+}
+
+.title.layout{
+    width: 98%;
+    flex-direction: column;
+    align-items: flex-start;
+    h1{ 
+        width:fit-content;
+    }
+}
+.info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    div{
+        display: flex;
+        justify-content: space-between;
+        
+    }
+}
+
+.black{
+background: rgba(0, 0, 0, 0.498);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(15px);
+-webkit-backdrop-filter: blur(15px);
+border: 1px solid rgba(255, 255, 255, 0.17);
+width: 98%;
+}
+
+/* Aggiungi nel tuo file global.css */
+.transition-fade {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+  
+  html.is-animating .transition-fade {
+    opacity: 0;
+  }
+  

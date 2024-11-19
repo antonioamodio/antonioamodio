@@ -9,9 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106",
-    "next": "15.0.3"
+    "@react-three/drei": "^9.117.2",
+    "@react-three/fiber": "^8.17.10",
+    "framer-motion": "^11.11.17",
+    "gsap": "^3.12.5",
+    "next": "^15.0.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sass": "^1.81.0",
+    "simplex-noise": "^4.0.3",
+    "swup": "^4.8.1",
+    "three": "^0.170.0"
   },
   "devDependencies": {
     "eslint": "^8",

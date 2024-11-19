@@ -1,95 +1,99 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+import RenderEnv from '@/component/RenderEnv';
+import Link from 'next/link';
+import Menu from '@/component/Menu';
+import { useRef, useEffect, useState } from 'react';
+import RandomText from '@/component/RandomText';
+
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const scrollRef = useRef(null);
+  const [rotateArrow, setRotateArrow] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrollRef.current) {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const shouldRotate = scrollTop >= window.innerHeight;
+        setRotateArrow(shouldRotate);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const handleArrowClick = () => {
+    if (scrollRef.current) {
+      if (rotateArrow) {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      } else {
+        window.scrollTo({
+          top: window.innerHeight,
+          behavior: 'smooth',
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 4000);
+
+    return () => clearTimeout(loadingTimer);
+  }, []);
+
+
+  return (
+    <section className="homee">
+      <div className={`arrow ${rotateArrow ? 'rotate' : ''}`} onClick={handleArrowClick}></div>
+
+      <section className="section-standard home" id='home'>
+        <div className="slot-25 social no-mobile">
+          <Link href={'https://www.instagram.com/kowi.303/'}>Instagram</Link>
+          <Link href={'https://www.linkedin.com/in/antonio-amodio-066400277/'}>Linkedin</Link>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+        <div className="container">
+          <div className="info only-mobile">
+            <div className="slot-info"><p>Sound Maker.</p><p>Dj.</p></div>
+            <div className="slot-info right-mobile"><p>04/08/2004</p></div>
+          </div>
+          <h1 className="damn">ANTONIO AMODIO</h1>
+          <div className="info">
+            <div className="slot-info"><p>Born in <b>Naples</b>.</p><p>Based in <b>Modena</b>.</p></div>
+            <div className="slot-info right-mobile"><p>Web Developer.</p><p>2D/3D Designer.</p></div>
+            <div className="slot-info no-mobile"><p>Sound Maker.</p><p>Dj.</p></div>
+            <div className="slot-info no-mobile"><p>04/08/2004</p></div>
+          </div>
+
+        </div>
+        <div className="slot-25 no-mobile"></div>
+      </section>
+
+      <section className="section-standard about-me">
+            <div className="slot-25"></div>
+            <div className="container">
+              <div className="top">
+                    <h1 className="damn">ABOUT ME</h1>
+                    <div className="top2"></div>
+                </div>
+                <div className="glass">
+                  <RandomText/>
+                </div>
+            </div>
+            <div className="slot-25"></div>
+      </section>
+
+      <section className="section-standard"></section>
+      <section className="section-standard"></section>
+    </section>
+  )
 }

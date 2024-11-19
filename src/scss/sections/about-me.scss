@@ -1,0 +1,43 @@
+.about-me{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    h1{
+        font-size: $standardSize*3;
+        text-align: center;
+        @include size-md(){
+            font-size: $standardSize*8;
+        }
+    }
+
+    .glass{
+        background: rgba(0, 0, 0, 0.19);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.17);
+        padding: 2%;
+    }
+
+    .top{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        @include size-md(){
+            flex-direction: row;
+        }
+    }
+    .top2{
+        height: 250px;
+        width: 70vw;
+        border: 1px solid red;
+        @include size-md(){
+           width:20vw;
+        }
+    }
+
+
+}
