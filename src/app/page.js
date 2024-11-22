@@ -54,46 +54,18 @@ export default function Home() {
 
   return (
     <section className="homee">
-      <div className={`arrow ${rotateArrow ? 'rotate' : ''}`} onClick={handleArrowClick}></div>
-
-      <section className="section-standard home" id='home'>
-        <div className="slot-25 social no-mobile">
-          <Link href={'https://www.instagram.com/kowi.303/'}>Instagram</Link>
-          <Link href={'https://www.linkedin.com/in/antonio-amodio-066400277/'}>Linkedin</Link>
-        </div>
-        <div className="container">
-          <div className="info only-mobile">
-            <div className="slot-info"><p>Sound Maker.</p><p>Dj.</p></div>
-            <div className="slot-info right-mobile"><p>04/08/2004</p></div>
-          </div>
-          <h1 className="damn">ANTONIO AMODIO</h1>
-          <div className="info">
-            <div className="slot-info"><p>Born in <b>Naples</b>.</p><p>Based in <b>Modena</b>.</p></div>
-            <div className="slot-info right-mobile"><p>Web Developer.</p><p>2D/3D Designer.</p></div>
-            <div className="slot-info no-mobile"><p>Sound Maker.</p><p>Dj.</p></div>
-            <div className="slot-info no-mobile"><p>04/08/2004</p></div>
-          </div>
-
-        </div>
-        <div className="slot-25 no-mobile"></div>
+      <section className="section-standard" id='home'>
+      <div className="title">
+        <h1>ANTONIO</h1>
+        <h1>AMODIO</h1>
+      </div>
+      <div/>
+      <div/>
+      <div className="description">
+        <p>Web Developer and Graphic Designer based in Modena, focused on delivering cohesive and engaging digital experiences.</p>
+      </div>
       </section>
-
-      <section className="section-standard about-me">
-            <div className="slot-25"></div>
-            <div className="container">
-              <div className="top">
-                    <h1 className="damn">ABOUT ME</h1>
-                    <div className="top2"></div>
-                </div>
-                <div className="glass">
-                  <RandomText/>
-                </div>
-            </div>
-            <div className="slot-25"></div>
-      </section>
-
-      <section className="section-standard"></section>
-      <section className="section-standard"></section>
+      <section className="section-standard"></section> 
     </section>
   )
 }

@@ -7,47 +7,26 @@
 @import './sections/home.scss';
 @import './sections/about-me.scss';
 @import './random-text.scss';
-// @import url('https://fonts.cdnfonts.com/css/outward');
-@import url('https://fonts.cdnfonts.com/css/dm-sans');
-@import url('https://fonts.cdnfonts.com/css/damn');
-// @import url("https://use.typekit.net/xdr0jma.css");
+@import './background.scss';
+
+@import url('https://fonts.cdnfonts.com/css/coolvetica');
 
 @font-face {
-    font-family: 'DAMN';
-    src: url('https://fonts.cdnfonts.com/s/XXXXXX/damn.woff2') format('woff2'),
-         url('https://fonts.cdnfonts.com/s/XXXXXX/damn.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'DM Sans';
-    src: url('https://fonts.cdnfonts.com/s/XXXXXX/dm-sans.woff2') format('woff2'),
-         url('https://fonts.cdnfonts.com/s/XXXXXX/dm-sans.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+    font-family: 'Coolvetica', sans-serif;
+    src: url('https://fonts.cdnfonts.com/css/coolvetica');
 }
 
-body {
-    font-family: 'DM Sans', sans-serif;
-}
-
-
-body{
-    font-family: 'DAMN', sans-serif;
-    background-color: black;
-}
 body, html{
     margin: 0;
     padding: 0;
+    font-family: 'Coolvetica', sans-serif;
 }
+body{background-color: black;}
 
 h1{
 color: $colorDef;
 font-weight: 100;
 margin: 0;
-// &.standard{ font-family: $standard;}
-// &.secondary{ font-family: $secondary;}
-&.damn{ font-family: $damn;}
 }
 
 a{
@@ -104,6 +83,40 @@ p{
         padding:0;
         line-height: 1;
         display: inline;
+    }
+    
+    &#home{
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr 2fr;
+        align-items: flex-end;
+        padding: 0 1.5% 0 1.5%;
+
+        .title{ 
+            position:fixed; 
+            display: flex; 
+            flex-direction: column;
+            padding-left: 1.5%;
+            bottom: 3%;
+        }
+        
+        h1{
+            color: white;
+            font-weight: 600;
+            @include font(regular, l);
+            @include size-md{
+            @include font(regular, xxxl);
+            }
+            text-align: left;
+            line-height: .8;
+        }
+
+        .description{
+            color: white;
+            margin-bottom: 3%;
+            font-family: $coolvetica;
+            font-weight: 300;
+        }
     }
 }
 
@@ -339,4 +352,3 @@ width: 98%;
   html.is-animating .transition-fade {
     opacity: 0;
   }
-  

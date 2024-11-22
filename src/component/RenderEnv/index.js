@@ -14,7 +14,7 @@ export default function RenderEnv() {
     const height = 20;
     const particleCount = 5000;
     const particleSize = 0.3;
-    const particleColor = 0xff0000;
+    const particleColor = 0xFFFFFF;
     let noiseFactor = 0;
 
     useEffect(() => {
@@ -22,9 +22,9 @@ export default function RenderEnv() {
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
         if (!rendererRef.current) {
-            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); // Aggiungi "alpha: true"
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setClearColor(0x000000);
+            renderer.setClearColor(0x000000, 0); // Sfondo trasparente
             containerRef.current.appendChild(renderer.domElement);
             rendererRef.current = renderer;
         }

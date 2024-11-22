@@ -8,23 +8,28 @@ export default function Menu() {
 
   return (
     <section className="menu">
-      <Link href={'#'}>About</Link>
-      
-      {/* Conditionally render "Home" or "Archive" */}
-      {pathname === '/archive' ? (
-        <Link href={'/'}>Home</Link>
-      ) : (
-        <Link href={'/archive'}>Archive</Link>
-      )}
 
-      {/* Conditionally render "Home" or "Sound" */}
-      {pathname === '/sound' ? (
-        <Link href={'/'}>Home</Link>
-      ) : (
-        <Link href={'#'}>Sound</Link>
-      )}
+      <div/>
+      <div/>
+      <div className="link">
+        <Link href={'#'}>About</Link>
+        
+        {/* Conditionally render "Home" or "Archive" */}
+        {pathname === '/archive' ? (
+          <Link href={'/'}>Home</Link>
+        ) : (
+          <Link href={'/archive'}>Archive</Link>
+        )}
 
-      <Link href={'#'}>Contact</Link>
+        {/* Conditionally render "Home" or "Sound" */}
+        {pathname === '/sound' ? (
+          <Link href={'/'}>Home</Link>
+        ) : (
+          <Link href={'#'}>Sound</Link>
+        )}
+
+        <Link href={'#'}>Contact</Link>
+      </div>
     </section>
   );
 }

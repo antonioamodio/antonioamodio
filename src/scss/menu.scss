@@ -1,27 +1,35 @@
 @import './variable.scss';
 @import './mixin.scss';
 .menu {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding:5%;
-    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
     position: fixed;
-    background-color: black;
+    .link{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        padding-top: 2%; 
+        @include size-md{
+        padding-top: 3%; 
+        }  
+    }
     @include size-md{
         background-color: transparent;
+        grid-template-columns: 1fr 1fr 2fr;
         position: fixed;
         z-index: 999;
-        width: 62%;
-        padding: 2% 0 0 19%;
+        width: 100%;
     }
     a{
-        color: $colorDef;
+        color: white;
+        font-family: $coolvetica;
         font-size: $standardSize*0.5;
         mix-blend-mode: difference;
         text-transform: uppercase;
+        text-align: center;
         @include size-md{
             font-size: $standardSize*0.7;
+            text-align: left;
         }
     }
 }

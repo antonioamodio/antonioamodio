@@ -71,10 +71,10 @@
         }
     
         @if $size == 'xxxl' {
-            $factor: 6;
-            $factorMd: 6.1;
-            $factorLg: 6.2;
-            $factorXl: 6.3;
+            $factor: 4.5;
+            $factorMd: 4.5;
+            $factorLg: 4.5;
+            $factorXl: 4.5;
         }
     
         @if $size == 'h5' {

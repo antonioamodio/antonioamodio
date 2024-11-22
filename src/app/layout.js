@@ -4,6 +4,7 @@ import "../scss/app.scss";
 import Menu from "@/component/Menu";
 import RenderEnv from "@/component/RenderEnv";
 import SwupWrapper from "@/component/SwupWrapper";
+import BackGround from "@/component/BackGround";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,11 +17,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <RenderEnv/>
-      <SwupWrapper>
+      <div className="layout">
+        <BackGround/>
         <Menu/>
-        {children}
-      </SwupWrapper>
+            {/* <RenderEnv/> */}
+              <SwupWrapper>
+                {children}
+              </SwupWrapper>
+        </div>
         </body>
     </html>
   );
