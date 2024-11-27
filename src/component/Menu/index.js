@@ -12,23 +12,25 @@ export default function Menu() {
       <div/>
       <div/>
       <div className="link">
-        <Link href={'#'}>About</Link>
+        <Link href={'#about'}>About</Link>
         
-        {/* Conditionally render "Home" or "Archive" */}
         {pathname === '/archive' ? (
           <Link href={'/'}>Home</Link>
         ) : (
           <Link href={'/archive'}>Archive</Link>
         )}
 
-        {/* Conditionally render "Home" or "Sound" */}
         {pathname === '/sound' ? (
           <Link href={'/'}>Home</Link>
         ) : (
-          <Link href={'#'}>Sound</Link>
+          <Link href={'/sound'}>Sound</Link>
         )}
 
-        <Link href={'#'}>Contact</Link>
+        {pathname === '/contact' ? (
+          <Link href={'/'}>Home</Link>
+        ) : (
+          <Link href={'/contact'}>Contact</Link>
+        )}
       </div>
     </section>
   );

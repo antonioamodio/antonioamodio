@@ -24,16 +24,15 @@ body, html{
 body{background-color: black;}
 
 h1{
-color: $colorDef;
-font-weight: 100;
+font-weight: 400;
 margin: 0;
 }
 
 a{
     text-decoration: none;
     font-family: $paragraph;
-    font-weight: 200;
-    color: $colorDef;
+    font-weight: 800;
+    color: white;
     font-size: $standardSize*0.5;
     @include size-md{
         font-size: $standardSize*0.6;
@@ -42,7 +41,10 @@ a{
 p{
     font-family: $paragraph;
     margin: 0;
-    font-size: $standardSize*0.6;
+    font-size: $standardSize*0.46;
+    @include size-md{
+        font-size: $standardSize*0.6;
+    }
 }
 
 .mobile{
@@ -358,3 +360,13 @@ width: 98%;
   html.is-animating .transition-fade {
     opacity: 0;
   }
+
+.center{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    font-family: $coolvetica;
+    font-weight: 400 !important;
+    @include font(regular, l);
+    color: white;
+}

@@ -54,6 +54,7 @@ export default function Home() {
 
   return (
     <section className="homee">
+      <RenderEnv/>
       <section className="section-standard" id='home'>
       <div className="title">
         <h1>ANTONIO</h1>
@@ -62,10 +63,10 @@ export default function Home() {
       <div/>
       <div/>
       <div className="description">
-        <p>Web Developer and Graphic Designer based in Modena, focused on delivering cohesive and engaging digital experiences.</p>
+        {/* <p>Web Developer and Graphic Designer based in Modena, focused on delivering cohesive and engaging digital experiences.</p> */}
+      <p> My website is currently under development. Check back soon to discover all the updates!</p>  
       </div>
-      </section>
-      <section className="section-standard"></section> 
+      </section>    
     </section>
   )
 }

@@ -1,77 +1,153 @@
-.background{
-    position: fixed;
-    height: 100vh;
+:root {
+    --color-bg1: rgb(0, 0, 0);
+    --color-bg2: rgb(0, 0, 0);
+    --color1: 0, 13, 255;
+    --color2: 0, 13, 255;
+    --color3: 0, 13, 255;
+    --color4: 0, 13, 255;
+    --color5: 0, 13, 255;
+    --color-interactive: 0, 13, 255;
+    --circle-size: 80%;
+    --blending: hard-light;
+  }
+  
+  html, body {
+    font-family: 'Dongle', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .text-container {
+    z-index: 1; /* Assicurati che il testo stia sopra lo sfondo */
     width: 100vw;
-    z-index: -10;
-    overflow: hidden; /* Assicura che gli SVG non escono dal viewport */
-}
-
-.blue-box-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-}
-
-.vector {
-    position: absolute;
-    animation: float 10s infinite linear, move 15s infinite linear; /* Animazioni di movimento */
-}
-
-/* Movimento casuale per ogni SVG */
-@keyframes float {
-    0% {
-        transform: translate3d(0, 0, 0);
-    }
-    25% {
-        transform: translate3d(30px, -30px, 0);
-    }
-    50% {
-        transform: translate3d(-50px, 50px, 0);
-    }
-    75% {
-        transform: translate3d(20px, 10px, 0);
-    }
-    100% {
-        transform: translate3d(0, 0, 0);
-    }
-}
-
-/* Movimento laterale (per simulare galleggiamento) */
-@keyframes move {
-    0% {
-        transform: translateX(-100%) rotate(0deg);
-    }
-    100% {
-        transform: translateX(100vw) rotate(360deg); /* Spostamento orizzontale con rotazione */
-    }
-}
-
-/* Aggiungi un effetto di blur dinamico quando la velocità di movimento è più alta */
-.vector-1 {
-    animation-duration: 10s;
-}
-
-.vector-2 {
-    animation-duration: 12s;
-}
-
-.vector-3 {
-    animation-duration: 14s;
-}
-
-.vector-4 {
-    animation-duration: 16s;
-}
-
-/* Overlay con sfocatura */
-.blurred-overlay {
-    position: absolute;
+    height: 100vh;
+    display: flex;
+    position: relative; /* Non fixed per evitare problemi di scorrimento */
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    backdrop-filter: blur(400px); /* Più sfocatura per l'effetto generale */
-    background-color: rgba(255, 255, 255, 0); /* Sfondo semi-trasparente */
-}
+    justify-content: center;
+    align-items: center;
+    font-size: 96px;
+    color: white;
+    opacity: 0.8;
+    user-select: none;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .fixed-background {
+    position: fixed; /* Lo sfondo è fisso e non si muove con lo scroll */
+    z-index: -10; /* Sta dietro a tutti gli altri elementi */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Impedisce di far uscire i gradienti */
+    background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
+  }
+  
+  .gradient-bg {
+    svg {
+      display: none;
+    }
+  
+    .gradients-container {
+      filter: url(#goo) blur(40px);
+      width: 100%;
+      height: 100%;
+    }
+  
+    .g1,
+    .g2,
+    .g3,
+    .g4,
+    .g5,
+    .interactive {
+      position: absolute;
+      background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
+      mix-blend-mode: var(--blending);
+      width: var(--circle-size);
+      height: var(--circle-size);
+      top: calc(50% - var(--circle-size) / 2);
+      left: calc(50% - var(--circle-size) / 2);
+      transform-origin: center;
+      animation: moveInCircle 30s infinite linear, moveVertical 20s ease-in-out infinite;
+      opacity: 1;
+    }
+  
+    .g1 {
+      animation: moveVertical 30s ease infinite;
+    }
+  
+    .g2 {
+      background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%);
+      animation: moveInCircle 20s reverse infinite;
+      transform-origin: calc(50% - 400px);
+    }
+  
+    .g3 {
+      background: radial-gradient(circle at center, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%);
+      animation: moveInCircle 40s linear infinite;
+      transform-origin: calc(50% + 400px);
+      top: calc(50% - var(--circle-size) / 2 + 200px);
+      left: calc(50% - var(--circle-size) / 2 - 500px);
+    }
+  
+    .g4 {
+      background: radial-gradient(circle at center, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%);
+      animation: moveHorizontal 40s ease infinite;
+      transform-origin: calc(50% - 200px);
+      opacity: 0.7;
+    }
+  
+    .g5 {
+      background: radial-gradient(circle at center, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%);
+      width: calc(var(--circle-size) * 2);
+      height: calc(var(--circle-size) * 2);
+      transform-origin: calc(50% - 800px) calc(50% + 200px);
+      animation: moveInCircle 20s ease infinite;
+    }
+  
+    .interactive {
+      background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.8) 0, rgba(var(--color-interactive), 0) 50%);
+      top: -50%;
+      left: -50%;
+      opacity: 0.7;
+    }
+  }
+  
+  @keyframes moveInCircle {
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes moveVertical {
+    0% {
+      transform: translateY(-50%);
+    }
+    50% {
+      transform: translateY(50%);
+    }
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+  
+  @keyframes moveHorizontal {
+    0% {
+      transform: translateX(-50%) translateY(-10%);
+    }
+    50% {
+      transform: translateX(50%) translateY(10%);
+    }
+    100% {
+      transform: translateX(-50%) translateY(-10%);
+    }
+  }
+  

@@ -12,7 +12,7 @@ export default function RenderEnv() {
 
     const radius = 50;
     const height = 20;
-    const particleCount = 5000;
+    const particleCount = 3000;
     const particleSize = 0.3;
     const particleColor = 0xFFFFFF;
     let noiseFactor = 0;
@@ -22,9 +22,9 @@ export default function RenderEnv() {
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
         if (!rendererRef.current) {
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); // Aggiungi "alpha: true"
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setClearColor(0x000000, 0); // Sfondo trasparente
+            renderer.setClearColor(0x000000, 0);
             containerRef.current.appendChild(renderer.domElement);
             rendererRef.current = renderer;
         }
@@ -63,45 +63,35 @@ export default function RenderEnv() {
 
         const animate = () => {
             requestAnimationFrame(animate);
-        
+
             if (particlesRef.current) {
                 const positions = particlesRef.current.geometry.attributes.position.array;
                 const time = performance.now() * 0.001;
                 const scale = 0.1;
-        
-                const initialPositions = new Float32Array(positions.length);
-        
-                for (let i = 0; i < positions.length; i += 3) {
-                    const angle = (i / particleCount) * Math.PI * 2;
-                    initialPositions[i] = Math.cos(angle) * radius + (Math.random() - 0.5) * 10;
-                    initialPositions[i + 1] = Math.random() * height - height / 2;
-                    initialPositions[i + 2] = Math.sin(angle) * radius + (Math.random() - 0.5) * 10;
-                }
-        
+
                 for (let i = 0; i < positions.length; i += 3) {
                     const x = positions[i];
                     const y = positions[i + 1];
                     const z = positions[i + 2];
-        
+
                     const curlX = noise3D(x * scale, y * scale, z * scale + time) * noiseFactor;
                     const curlY = noise3D(x * scale + time, y * scale, z * scale) * noiseFactor;
                     const curlZ = noise3D(x * scale, y * scale + time, z * scale) * noiseFactor;
-        
+
                     positions[i] += curlX;
                     positions[i + 1] += curlY;
                     positions[i + 2] += curlZ;
-        
+
                     positions[i] = THREE.MathUtils.lerp(positions[i], initialPositions[i], 0.1 * (1 - noiseFactor));
                     positions[i + 1] = THREE.MathUtils.lerp(positions[i + 1], initialPositions[i + 1], 0.1 * (1 - noiseFactor));
                     positions[i + 2] = THREE.MathUtils.lerp(positions[i + 2], initialPositions[i + 2], 0.1 * (1 - noiseFactor));
                 }
-        
+
                 particlesRef.current.geometry.attributes.position.needsUpdate = true;
             }
-        
+
             renderer.render(scene, camera);
         };
-        
 
         animate();
 
@@ -111,17 +101,19 @@ export default function RenderEnv() {
             renderer.setSize(window.innerWidth, window.innerHeight);
         };
 
-        const handleScroll = () => {
-            const maxScroll = document.body.scrollHeight - window.innerHeight;
-            noiseFactor = window.scrollY / maxScroll;
+        const handleMouseMove = (event) => {
+            // Calcola il noiseFactor in base alla posizione verticale del mouse
+            const windowHeight = window.innerHeight;
+            const mouseY = event.clientY; // Posizione Y del mouse
+            noiseFactor = 1 - mouseY / windowHeight; // Normalizza e inverte (alto: 1, basso: 0)
         };
 
         window.addEventListener('resize', handleResize);
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('mousemove', handleMouseMove);
 
         return () => {
             window.removeEventListener('resize', handleResize);
-            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('mousemove', handleMouseMove);
             renderer.dispose();
         };
     }, [radius, height, particleCount, particleSize]);

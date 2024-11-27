@@ -5,9 +5,11 @@
     grid-template-columns: 1fr;
     width: 100%;
     position: fixed;
+    color: white;
     .link{
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        // grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr;
         padding-top: 2%; 
         @include size-md{
         padding-top: 3%; 

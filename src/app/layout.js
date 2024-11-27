@@ -1,8 +1,7 @@
 import { Inter } from "next/font/google";
 import { motion } from 'framer-motion';
 import "../scss/app.scss";
-import Menu from "@/component/Menu";
-import RenderEnv from "@/component/RenderEnv";
+import Menu from "@/component/Menu"
 import SwupWrapper from "@/component/SwupWrapper";
 import BackGround from "@/component/BackGround";
 
@@ -19,8 +18,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
       <div className="layout">
         <BackGround/>
-        <Menu/>
-            {/* <RenderEnv/> */}
+        {/* <Menu/> */}
               <SwupWrapper>
                 {children}
               </SwupWrapper>

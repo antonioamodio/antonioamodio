@@ -64,7 +64,7 @@ export default function Archive() {
       ];
   return (
     <section className="archive">
-    <div className="blur"></div>
+    {/* <div className="blur"></div>
     <div className="top">
         <h1 className="secondary">ARCHIVE</h1>
     </div>
@@ -72,6 +72,9 @@ export default function Archive() {
         <Table
         data={jsonData}
         />
+    </div> */}
+    <div className="center">
+        <h1>Work In Progress</h1>
     </div>
     </section>
   )
