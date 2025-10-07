@@ -1,36 +1,85 @@
 .table{
-    color: rgb(255, 255, 255);
-    font-family: $coolvetica;
-    table{
-        width: 100%;
+    color:#fff;
+    font-family:$coolvetica;
+  
+    table{ width:100%; border-collapse: collapse; }
+    
+    span{ 
+        font-weight:200;
+        font-size: 14px;
     }
-    tr{
-        display: grid;
-        grid-template-columns: 2fr 1fr 3fr 1fr;
-        grid-template-rows: 1fr;
+    @include size-md(){
+    span{ font-size: 16px; }
     }
-    th{
-        font-weight: 800;
-        font-size: $standardSize*0.9;
-        display: flex;
+
+    tbody > tr{
+      border-top:1px solid #fff;
     }
-    tbody{
-        tr{
-            padding: $standardSize*0.3 0 $standardSize*0.3 0;
-            border-top: 1px solid rgb(255, 255, 255);
+  
+    .row-td{
+        padding: .7rem 1rem;
+    }
+  
+    /* ROW 1: griglia compatta con 4 colonne */
+    .row-1{
+        display:grid;
+        grid-template-columns: 3fr 1fr 2fr 2fr;
+        gap:1vw;
+        cursor:pointer;
+        @include size-md(){
+            grid-template-columns: 4fr 2fr 4fr 1fr;
         }
-        th{
-            font-weight: 400;
-        }
     }
+  
+    /* ROW 2: collassata di default, visibile in .open */
+    .row-2{
+      display:flex;
+      flex-direction: column;
+      gap:10vw;
+
+      @include size-md(){
+        display:grid;
+        grid-template-columns: 2fr 3fr;
+        gap:1.5vw;
+      }   
+  
+      overflow:hidden;
+      max-height:0;
+      opacity:0;
+      transform: translateY(-4px);
+      transition:
+        max-height .35s ease,
+        opacity .35s ease,
+        transform .35s ease,
+        padding-top .35s ease;
+  
+      /* togli spazio quando è chiusa */
+      padding-top:0;
+      .muted{ opacity:.6; font-style:italic; }
+      .carousel-slot{ padding: 0; }
+      @include size-md(){
+        .carousel-slot{ padding: 0 24%; }
+      } 
+    }
+  
+    /* Stato aperto: mostra row-2 con transizione */
+    tr.open .row-2{
+      max-height: 1200px; /* valore alto per ospitare il contenuto */
+      opacity:1;
+      transform: translateY(0);
+      padding-top: $standardSize*0.3;
+
+      @include size-md(){
+        padding-top: $standardSize*0.3;
+      } 
+    }
+  
     .image{
-        height: 350px;
-        width: 400px;
-        position: fixed;
-        background-color: rgba(255, 0, 0, 0);
-        left: 50vw;
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
+      position:fixed;
+      left:50vw;
+      background-position:center;
+      background-size:cover;
+      background-repeat:no-repeat;
     }
-}
+  }
+  

@@ -1,16 +1,22 @@
 .archive{
 
-    .top{
-        padding: $spacing;
-        h1{
-            text-align: center;
-            padding-top: 5%;
-            font-size: $standardSize*5;
-            font-family: $coolvetica;
-            font-weight: 400;
-            color: white;
+    .title-archive{
+        color: white;
+        font-family: "coolvetica";
+        text-align: center;
+        font-size: 12vw;
+        text-transform: uppercase;
+    }
+
+    .archive-menu{
+        display: flex;
+        justify-content: space-between;
+        a{
+            text-transform: uppercase;
+            font-weight: 200;
         }
-    }   
+    }
+
     .down{
         padding: $spacing;
         padding-top: 0;

@@ -8,6 +8,7 @@
 @import './sections/about-me.scss';
 @import './random-text.scss';
 @import './background.scss';
+@import './carousel.scss';
 
 @import url('https://fonts.cdnfonts.com/css/coolvetica');
 
@@ -19,7 +20,7 @@
 body, html{
     margin: 0;
     padding: 0;
-    font-family: 'Coolvetica', sans-serif;
+    font-family: 'Coolvetica', sans-serif !important;
 }
 body{background-color: black;}
 
@@ -85,46 +86,6 @@ p{
         padding:0;
         line-height: 1;
         display: inline;
-    }
-    
-    &#home{
-        position: relative;
-        display: grid;
-        grid-template-columns: 1fr 1fr 2fr;
-        align-items: flex-end;
-        padding: 0 1.5% 0 1.5%;
-
-        .title{ 
-            position:fixed; 
-            display: flex; 
-            flex-direction: column;
-            padding-left: 5%;
-            @include size-md{
-                padding-left: 1.5%;   
-            }
-            bottom: 3%;
-        }
-        
-        h1{
-            color: white;
-            font-weight: 600;
-            @include font(regular, l);
-            @include size-md{
-            @include font(regular, xxxl);
-            }
-            text-align: left;
-            line-height: .8;
-        }
-
-        .description{
-            color: white;
-            margin-bottom: 10%;
-            @include size-md{
-            margin-bottom: 3%;   
-            }
-            font-family: $coolvetica;
-            font-weight: 300;
-        }
     }
 }
 
@@ -350,17 +311,6 @@ backdrop-filter: blur(15px);
 border: 1px solid rgba(255, 255, 255, 0.17);
 width: 98%;
 }
-
-/* Aggiungi nel tuo file global.css */
-.transition-fade {
-    opacity: 1;
-    transition: opacity 0.5s ease;
-  }
-  
-  html.is-animating .transition-fade {
-    opacity: 0;
-  }
-
 .center{
     height: 100vh;
     display: flex;
@@ -370,3 +320,83 @@ width: 98%;
     @include font(regular, l);
     color: white;
 }
+
+
+
+
+
+/* HOME PAGE */
+
+.section-standard#home{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .title-home{
+        color: white;
+        font-family: "coolvetica";
+        text-align: center;
+        font-size: 5vw;
+        h1{
+            line-height: .4;
+        }
+    }
+
+    .home-menu{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1.5vw;
+
+        a{
+            text-transform: uppercase;
+            font-weight: 200;
+        }
+    }
+
+    .info{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .slot{
+            display: flex;
+            flex-direction: column;
+
+            &.ct{ text-align: center;}
+            &.rg{text-align: right;}
+            span{
+                color: white;
+                text-transform: uppercase;
+                font-weight: 200;
+                margin: 0;
+            }
+        }
+    }
+}
+
+
+
+/* stato normale */
+.transition-fade {
+    opacity: 1;
+    transition: opacity .45s ease-in-out;
+  }
+  
+  /* durante l’animazione Swup aggiunge .is-animating su <html> */
+  html.is-animating .transition-fade {
+    opacity: 0;
+  }
+  
+  /* opzionale: durante l’uscita */
+  html.is-leaving .transition-fade {
+    opacity: 0;
+  }
+  
+  /* opzionale: effetti al background se usi gli hook
+  html.bg-fade .backdrop-selector {
+    filter: blur(2px);
+    opacity: .85;
+    transition: filter .45s ease-in-out, opacity .45s ease-in-out;
+  }
+  */
+  

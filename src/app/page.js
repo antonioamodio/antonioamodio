@@ -1,9 +1,9 @@
 'use client'
-import RenderEnv from '@/component/RenderEnv';
+import RenderEnv from '@/components/RenderEnv';
 import Link from 'next/link';
-import Menu from '@/component/Menu';
+import Menu from '@/components/Menu';
 import { useRef, useEffect, useState } from 'react';
-import RandomText from '@/component/RandomText';
+import RandomText from '@/components/RandomText';
 
 
 export default function Home() {
@@ -56,17 +56,41 @@ export default function Home() {
     <section className="homee">
       <RenderEnv/>
       <section className="section-standard" id='home'>
-      <div className="title">
-        <h1>ANTONIO</h1>
-        <h1>AMODIO</h1>
-      </div>
-      <div/>
-      <div/>
-      <div className="description">
-        {/* <p>Web Developer and Graphic Designer based in Modena, focused on delivering cohesive and engaging digital experiences.</p> */}
-      <p> My website is currently under development. Check back soon to discover all the updates!</p>  
-      </div>
-      </section>    
+
+        <div className="main-contnet">
+
+        <div className="home-menu">
+          <Link href="/archive">archive</Link>
+          <Link href="/archive">archive</Link>
+          <Link href="/archive">archive</Link>
+        </div>
+
+        <div className="title-home">
+          <h1 style={{pointerEvents: 'none'}}>KOWI'S</h1><br/>
+          <h1>DIMENSION</h1>
+        </div>
+
+        <div className="info">
+          <div className="slot">
+            <span> antonio amodio</span>
+            <span> 04 / 08 / 2004</span>
+            <span>.</span>
+          </div>
+          <div className="slot ct">
+            <span> creative coder</span>
+            <span> graphic designer</span>
+            <span> musician</span>
+          </div>
+          <div className="slot rg">
+            <span> born in naples</span>
+            <span> based in modena</span>
+            <span>.</span>
+          </div>
+        </div>
+        
+        </div>
+
+      </section>  
     </section>
   )
 }

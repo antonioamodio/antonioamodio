@@ -9,20 +9,26 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-three/drei": "^9.117.2",
-    "@react-three/fiber": "^8.17.10",
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
     "@svgr/webpack": "^8.1.0",
-    "framer-motion": "^11.11.17",
-    "gsap": "^3.12.5",
+    "@swup/head-plugin": "^2.3.1",
+    "@swup/scroll-plugin": "^4.0.0",
+    "framer-motion": "^11.18.2",
+    "gsap": "^3.13.0",
+    "maath": "^0.10.8",
     "next": "^15.0.3",
+    "postprocessing": "^6.37.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sass": "^1.81.0",
     "simplex-noise": "^4.0.3",
-    "swup": "^4.8.1",
-    "three": "^0.170.0"
+    "swup": "^4.8.2",
+    "three": "^0.170.0",
+    "three-stdlib": "^2.36.0"
   },
   "devDependencies": {
+    "@types/node": "24.7.0",
     "eslint": "^8",
     "eslint-config-next": "15.0.3"
   }
