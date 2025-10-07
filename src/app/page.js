@@ -1,9 +1,9 @@
 'use client'
-import RenderEnv from '@/components/RenderEnv';
+import RenderEnv from '../components/RenderEnv';
 import Link from 'next/link';
-import Menu from '@/components/Menu';
+import Menu from '../components/Menu';
 import { useRef, useEffect, useState } from 'react';
-import RandomText from '@/components/RandomText';
+import RandomText from '../components/RandomText';
 
 
 export default function Home() {
@@ -66,7 +66,7 @@ export default function Home() {
         </div>
 
         <div className="title-home">
-          <h1 style={{pointerEvents: 'none'}}>KOWI'S</h1><br/>
+          <h1 style={{pointerEvents: 'none'}}>KOWI&apos;S</h1><br/>
           <h1>DIMENSION</h1>
         </div>
 

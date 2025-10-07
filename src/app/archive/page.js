@@ -1,6 +1,4 @@
-import Menu from "@/components/Menu";
-import RenderEnv from "@/components/RenderEnv";
-import Table from "@/components/Table";
+import Table from "../../components/Table";
 import Link from 'next/link';
 import Image from "next/image";
 

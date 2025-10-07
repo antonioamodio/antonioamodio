@@ -1,8 +1,8 @@
 import { Inter } from "next/font/google";
 import { motion } from 'framer-motion';
 import "../scss/app.scss";
-import SwupWrapper from "@/components/SwupWrapper";
-import BackGround from "@/components/BackGround";
+import SwupWrapper from "../components/SwupWrapper";
+import BackGround from "../components/BackGround";
 
 const inter = Inter({ subsets: ["latin"] });
 

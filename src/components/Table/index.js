@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useMemo } from 'react';
-import Carousel from '@/components/Carousel';
+import Carousel from '../Carousel';
 
 export default function Table({ data }) {
   const [hoveredCover, setHoveredCover] = useState(null);

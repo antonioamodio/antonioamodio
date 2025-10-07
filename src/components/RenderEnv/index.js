@@ -27,13 +27,7 @@ export default function RenderEnv() {
             renderer.setClearColor(0x000000, 0);
             containerRef.current.appendChild(renderer.domElement);
             rendererRef.current = renderer;
-          } else {
-            const canvas = rendererRef.current.domElement;
-            if (!containerRef.current.contains(canvas)) {
-              containerRef.current.appendChild(canvas);
-            }
-          }
-          
+        }
 
         const renderer = rendererRef.current;
 
@@ -120,17 +114,8 @@ export default function RenderEnv() {
         return () => {
             window.removeEventListener('resize', handleResize);
             window.removeEventListener('mousemove', handleMouseMove);
-            if (rendererRef.current) {
-                const canvas = rendererRef.current.domElement;
-                if (canvas && canvas.parentNode) {
-                  canvas.parentNode.removeChild(canvas);
-                }
-                rendererRef.current.dispose();
-                rendererRef.current = null;
-              }              
-            particlesRef.current = null;
-          };
-          
+            renderer.dispose();
+        };
     }, [radius, height, particleCount, particleSize]);
 
     return (
