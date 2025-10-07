@@ -17,9 +17,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
       <div className="layout">
         <BackGround/>
-              <SwupWrapper>
                 {children}
-              </SwupWrapper>
         </div>
         </body>
     </html>

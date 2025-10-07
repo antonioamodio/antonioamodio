@@ -10,12 +10,47 @@
 @import './background.scss';
 @import './carousel.scss';
 
-@import url('https://fonts.cdnfonts.com/css/coolvetica');
-
+/* === COOLVETICA FONTS === */
 @font-face {
-    font-family: 'Coolvetica', sans-serif;
-    src: url('https://fonts.cdnfonts.com/css/coolvetica');
-}
+    font-family: "Coolvetica";
+    src: url("/fonts/coolvetica/Coolvetica-Rg.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: "Coolvetica";
+    src: url("/fonts/coolvetica/Coolvetica-Rg-It.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: "Coolvetica";
+    src: url("/fonts/coolvetica/Coolvetica-Hv-Comp.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: "Coolvetica";
+    src: url("/fonts/coolvetica/Coolvetica-Rg-Cond.woff2") format("woff2");
+    font-weight: 400;
+    font-stretch: condensed; /* opzionale */
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: "Coolvetica";
+    src: url("/fonts/coolvetica/Coolvetica-Rg-Cram.woff2") format("woff2");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+  }
 
 body, html{
     margin: 0;
