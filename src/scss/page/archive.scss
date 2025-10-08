@@ -1,11 +1,23 @@
 .archive{
 
+    .main-contnet {
+        margin: 3vw 0;
+        padding: 0 5vw;
+    }
+
     .title-archive{
         color: white;
         font-family: "coolvetica";
         text-align: center;
-        font-size: 12vw;
         text-transform: uppercase;
+        width: fit-content;
+
+        svg.logo {
+            width: 90vw;
+            @include size-md(){
+                width: 90vw;
+            } 
+        }
     }
 
     .archive-menu{

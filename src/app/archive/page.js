@@ -1,4 +1,5 @@
 import Table from "../../components/Table";
+import Logo from '../../../public/archive.svg';
 import Link from 'next/link';
 import Image from "next/image";
 
@@ -332,7 +333,7 @@ export default function Archive() {
         </div>
 
         <div className="title-archive">
-          <h1>archive</h1>
+        <Logo className="logo" aria-label="Brand logo" />
         </div>
         
     </div>

@@ -33,14 +33,17 @@
   
     /* ROW 2: collassata di default, visibile in .open */
     .row-2{
-      display:flex;
-      flex-direction: column;
-      gap:10vw;
 
-      @include size-md(){
-        display:grid;
-        grid-template-columns: 2fr 3fr;
-        gap:1.5vw;
+      .row-2-inner{
+        display:flex;
+        flex-direction: column;
+        gap:10vw;
+  
+        @include size-md(){
+          display:grid;
+          grid-template-columns: 2fr 3fr;
+          gap:1.5vw;
+        }
       }   
   
       overflow:hidden;

@@ -120,6 +120,24 @@ export default function RenderEnv() {
 
     return (
         <div ref={containerRef} className={`three-container`}>
+            <div className="absolute-span">
+                <span className="phrase">
+                    mouve your mous up and down to see the magic!
+                </span>
+
+                <div className="arrows" aria-hidden="true">
+                    {/* freccia su */}
+                    <svg className="icon arrow-up" viewBox="0 0 24 24">
+                    <path d="M12 19V5m0 0-6 6m6-6 6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    {/* freccia giù */}
+                    <svg className="icon arrow-down" viewBox="0 0 24 24">
+                    <path d="M12 5v14m0 0-6-6m6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+
+
             {isLoading && <div className="loading-screen">Loading...</div>}
         </div>
     );

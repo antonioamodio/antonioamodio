@@ -127,6 +127,7 @@ body, html{
     margin: 0;
     padding: 0;
     font-family: 'Coolvetica', sans-serif !important;
+    color: white;
 }
 body{background-color: black;}
 
@@ -137,9 +138,9 @@ margin: 0;
 
 a{
     text-decoration: none;
+    color: white;
     font-family: $paragraph;
     font-weight: 800;
-    color: white;
     font-size: $standardSize*0.5;
     @include size-md{
         font-size: $standardSize*0.6;
@@ -152,6 +153,14 @@ p{
     @include size-md{
         font-size: $standardSize*0.6;
     }
+}
+span{
+    font-weight: 200;
+    margin: 0;   
+    font-size: $standardSize*0.46;
+    @include size-md{
+        font-size: $standardSize*0.6;
+    } 
 }
 
 .mobile{
@@ -181,6 +190,8 @@ p{
 
 .section-standard{
     height: 100vh;
+    width: 100%;
+    position: fixed;
 
     .slot-25{
         height: 100%;
@@ -441,21 +452,27 @@ width: 98%;
     .title-home{
         color: white;
         font-family: "coolvetica";
-        text-align: center;
-        font-size: 5vw;
-        h1{
-            line-height: .4;
+        text-align: center;       
+        svg.logo {
+            width: 90vw;
+            @include size-md(){
+                width: 65vw;
+            } 
         }
     }
 
     .home-menu{
         display: flex;
         justify-content: space-between;
-        margin-bottom: 1.5vw;
+        margin-bottom: 3vw;
 
         a{
             text-transform: uppercase;
             font-weight: 200;
+            font-size: 3vw;
+            @include size-md(){
+                font-size: 1.3vw;
+            }    
         }
     }
 
@@ -475,34 +492,11 @@ width: 98%;
                 text-transform: uppercase;
                 font-weight: 200;
                 margin: 0;
+                font-size: 3vw;
+                @include size-md(){
+                    font-size: 1.3vw;
+                }    
             }
         }
     }
 }
-
-
-
-/* stato normale */
-.transition-fade {
-    opacity: 1;
-    transition: opacity .45s ease-in-out;
-  }
-  
-  /* durante l’animazione Swup aggiunge .is-animating su <html> */
-  html.is-animating .transition-fade {
-    opacity: 0;
-  }
-  
-  /* opzionale: durante l’uscita */
-  html.is-leaving .transition-fade {
-    opacity: 0;
-  }
-  
-  /* opzionale: effetti al background se usi gli hook
-  html.bg-fade .backdrop-selector {
-    filter: blur(2px);
-    opacity: .85;
-    transition: filter .45s ease-in-out, opacity .45s ease-in-out;
-  }
-  */
-  
