@@ -1,53 +1,67 @@
-'use client'
+'use client';
 import React, { useEffect, useRef, useState } from 'react';
 
 export default function RandomText() {
   const paragraphRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const originalTextRef = useRef('');
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (paragraphRef.current) {
-        const paragraphPosition = paragraphRef.current.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        // Controlla se il componente è nella finestra di visualizzazione
-        if (paragraphPosition < windowHeight) {
+    const paragraph = paragraphRef.current;
+    if (!paragraph) return undefined;
+
+    if (typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
           setIsVisible(true);
-          window.removeEventListener('scroll', handleScroll);
+          observer.disconnect();
         }
-      }
-    };
+      },
+      { threshold: 0.2 }
+    );
 
-    window.addEventListener('scroll', handleScroll);
-
-    return () => window.removeEventListener('scroll', handleScroll);
+    observer.observe(paragraph);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    if (isVisible) {
-      const animateText = () => {
-        const paragraph = paragraphRef.current;
-        const originalText = paragraph.textContent;
+    if (!isVisible) return undefined;
+    const paragraph = paragraphRef.current;
+    if (!paragraph) return undefined;
 
-        // Funzione per generare una combinazione casuale del testo
-        const shuffleText = (text) => {
-          return text.split('').sort(() => Math.random() - 0.5).join('');
-        };
-
-        // Visualizza combinazioni casuali ogni 0,1 secondi
-        const intervalId = setInterval(() => {
-          paragraph.textContent = shuffleText(originalText);
-        }, 100);
-
-        // Dopo 3,5 secondi, mostra il testo ordinato
-        setTimeout(() => {
-          clearInterval(intervalId); // Arresta l'aggiornamento casuale
-          paragraph.textContent = originalText;
-        }, 1500);
-      };
-
-      animateText(); // Avvia l'animazione quando il componente è visibile
+    if (!originalTextRef.current) {
+      originalTextRef.current = paragraph.textContent ?? '';
     }
+
+    const originalText = originalTextRef.current;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!originalText || prefersReducedMotion) {
+      paragraph.textContent = originalText;
+      return undefined;
+    }
+
+    const shuffleText = (text) => text.split('').sort(() => Math.random() - 0.5).join('');
+
+    const intervalId = window.setInterval(() => {
+      paragraph.textContent = shuffleText(originalText);
+    }, 100);
+
+    const timeoutId = window.setTimeout(() => {
+      clearInterval(intervalId);
+      paragraph.textContent = originalText;
+    }, 1500);
+
+    return () => {
+      clearInterval(intervalId);
+      clearTimeout(timeoutId);
+      paragraph.textContent = originalText;
+    };
   }, [isVisible]);
 
   return (

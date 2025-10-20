@@ -1,42 +1,94 @@
 'use client';
-import React, { useState, useMemo, useRef, useEffect } from 'react';
+import React, {
+  useState,
+  useMemo,
+  useRef,
+  useEffect,
+  useCallback,
+  useLayoutEffect,
+} from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import Carousel from '../Carousel';
 
-function Row({ item, isOpen, onToggle }) {
+const rowVariants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: [0.16, 1, 0.3, 1],
+      delay: i * 0.08,
+    },
+  }),
+};
+
+function Row({ item, isOpen, onToggle, index, reduceMotion }) {
   const innerRef = useRef(null);
   const [height, setHeight] = useState(0);
+  const [hasOpened, setHasOpened] = useState(isOpen);
+  const resizeObserverRef = useRef(null);
+  const frameRef = useRef(null);
 
   // misura e anima l'altezza reale del contenuto
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = innerRef.current;
-    if (!el) return;
+    if (!el) return undefined;
 
-    const update = () => {
-      if (isOpen) {
-        setHeight(el.scrollHeight);
-      } else {
-        setHeight(0);
-      }
+    const measure = () => {
+      if (!el) return;
+      setHeight(isOpen ? el.scrollHeight : 0);
     };
 
-    update();
+    measure();
 
-    // aggiorna l'altezza quando il contenuto cambia dimensione
-    const ro = new ResizeObserver(() => {
-      if (isOpen) setHeight(el.scrollHeight);
-    });
-    ro.observe(el);
+    const handleResize = () => {
+      if (frameRef.current !== null) return;
+      frameRef.current = window.requestAnimationFrame(() => {
+        frameRef.current = null;
+        if (isOpen) measure();
+      });
+    };
 
-    // aggiorna anche al resize della finestra
-    window.addEventListener('resize', update);
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    if (isOpen && typeof ResizeObserver !== 'undefined') {
+      const ro = new ResizeObserver(measure);
+      resizeObserverRef.current = ro;
+      ro.observe(el);
+    }
+
     return () => {
-      ro.disconnect();
-      window.removeEventListener('resize', update);
+      window.removeEventListener('resize', handleResize);
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
+      }
+      resizeObserverRef.current?.disconnect();
+      resizeObserverRef.current = null;
     };
   }, [isOpen, item]);
 
+  useEffect(() => {
+    if (isOpen && !hasOpened) {
+      setHasOpened(true);
+    }
+  }, [isOpen, hasOpened]);
+
+  const rowHeight = isOpen ? Math.max(0, height) : 0;
+
+  const MotionRow = reduceMotion ? 'tr' : motion.tr;
+  const motionProps = reduceMotion
+    ? {}
+    : {
+        variants: rowVariants,
+        initial: 'hidden',
+        animate: 'visible',
+        custom: index,
+      };
+
   return (
-    <tr className={isOpen ? 'open' : 'closed'}>
+    <MotionRow className={isOpen ? 'open' : 'closed'} {...motionProps}>
       <td className="row-td">
         {/* ROW 1: header riga (click per aprire/chiudere) */}
         <div className="row-1" onClick={onToggle} role="button" aria-expanded={isOpen}>
@@ -50,10 +102,11 @@ function Row({ item, isOpen, onToggle }) {
         <div
           className="row-2"
           style={{
-            height,
+            height: `${rowHeight}px`,
             opacity: isOpen ? 1 : 0,
             transform: isOpen ? 'translateY(0)' : 'translateY(-4px)',
           }}
+          aria-hidden={!isOpen}
         >
           <div ref={innerRef} className="row-2-inner">
             <div className="desc">
@@ -75,42 +128,53 @@ function Row({ item, isOpen, onToggle }) {
             </div>
 
             <div className="carousel-slot">
-              <Carousel media={item.content || []} />
+              {hasOpened && <Carousel media={item.content || []} />}
             </div>
           </div>
         </div>
       </td>
-    </tr>
+    </MotionRow>
   );
 }
 
 export default function Table({ data }) {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openId, setOpenId] = useState(null);
+  const reduceMotion = useReducedMotion();
 
   const toPublic = (s) => (typeof s === 'string' ? s.replace(/^\.\/+/, '/') : s);
 
   const rows = useMemo(
     () =>
-      (data || []).map((it) => ({
+      (Array.isArray(data) ? data : []).map((it, index) => ({
         ...it,
-        cover: toPublic(it.cover),
+        id: it.id ?? `${it.project ?? 'row'}-${index}`,
+        description: Array.isArray(it.description)
+          ? it.description.filter(Boolean)
+          : it.description,
         content: (it.content || []).map(toPublic),
       })),
     [data]
   );
 
-  const toggle = (i) => setOpenIndex((prev) => (prev === i ? null : i));
+  const toggle = useCallback(
+    (id) => {
+      setOpenId((prev) => (prev === id ? null : id));
+    },
+    []
+  );
 
   return (
     <section className="table">
       <table className="cinereousTable">
         <tbody>
-          {rows.map((item, i) => (
+          {rows.map((item, index) => (
             <Row
-              key={i}
+              key={item.id}
               item={item}
-              isOpen={openIndex === i}
-              onToggle={() => toggle(i)}
+              isOpen={openId === item.id}
+              onToggle={() => toggle(item.id)}
+              index={index}
+              reduceMotion={reduceMotion}
             />
           ))}
         </tbody>

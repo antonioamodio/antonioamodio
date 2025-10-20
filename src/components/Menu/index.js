@@ -6,31 +6,38 @@ import Link from "next/link";
 export default function Menu() {
   const pathname = usePathname();
 
+  const renderLink = (href, label) => (
+    <Link key={href} href={href}>
+      {label}
+    </Link>
+  );
+
+  const renderHashLink = (href, label) => {
+    return (
+      <a key={href} href={href}>
+        {label}
+      </a>
+    );
+  };
+
   return (
     <section className="menu">
-
-      <div/>
-      <div/>
+      <div />
+      <div />
       <div className="link">
-        <Link href={'#about'}>About</Link>
-        
-        {pathname === '/archive' ? (
-          <Link href={'/'}>Home</Link>
-        ) : (
-          <Link href={'/archive'}>Archive</Link>
-        )}
+        {renderHashLink('#about', 'About')}
 
-        {pathname === '/sound' ? (
-          <Link href={'/'}>Home</Link>
-        ) : (
-          <Link href={'/sound'}>Sound</Link>
-        )}
+        {pathname === '/archive'
+          ? renderLink('/', 'Home')
+          : renderLink('/archive', 'Archive')}
 
-        {pathname === '/contact' ? (
-          <Link href={'/'}>Home</Link>
-        ) : (
-          <Link href={'/contact'}>Contact</Link>
-        )}
+        {pathname === '/sound'
+          ? renderLink('/', 'Home')
+          : renderLink('/sound', 'Sound')}
+
+        {pathname === '/contact'
+          ? renderLink('/', 'Home')
+          : renderLink('/contact', 'Contact')}
       </div>
     </section>
   );

@@ -2,7 +2,8 @@
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import Logo from '../../public/main-logo.svg';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useMemo } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 
 // dinamico: il chunk viene caricato SOLO se il componente viene renderizzato
 const RenderEnvDesktop = dynamic(() => import('../components/RenderEnv'), {
@@ -21,8 +22,8 @@ function getIsDesktop() {
 export default function Home() {
   const scrollRef = useRef(null);
   const [rotateArrow, setRotateArrow] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const [isDesktop, setIsDesktop] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   // rileva desktop e aggiorna se cambia (es. rotate screen / resize)
   useEffect(() => {
@@ -50,15 +51,27 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (scrollRef.current) {
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        const shouldRotate = scrollTop >= window.innerHeight;
-        setRotateArrow(shouldRotate);
-      }
+    let rafId = null;
+
+    const updateArrow = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const shouldRotate = scrollTop >= window.innerHeight;
+      setRotateArrow((prev) => (prev === shouldRotate ? prev : shouldRotate));
+      rafId = null;
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const handleScroll = () => {
+      if (rafId !== null) return;
+      rafId = window.requestAnimationFrame(updateArrow);
+    };
+
+    updateArrow();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId !== null) window.cancelAnimationFrame(rafId);
+    };
   }, []);
 
   const handleArrowClick = () => {
@@ -69,46 +82,92 @@ export default function Home() {
     });
   };
 
-  useEffect(() => {
-    const loadingTimer = setTimeout(() => setIsLoading(false), 4000);
-    return () => clearTimeout(loadingTimer);
-  }, []);
+  const infoSlots = useMemo(
+    () => [
+      [' antonio amodio', ' 04 / 08 / 2004', '.'],
+      [' creative coder', ' graphic designer', ' musician'],
+      [' born in naples', ' based in modena', '.'],
+    ],
+    []
+  );
+
+  const animationsEnabled = !shouldReduceMotion;
+
+  const mainVariants = {
+    hidden: { opacity: 0, y: 32 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1],
+        staggerChildren: 0.14,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const blockVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
+  const infoContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.12 },
+    },
+  };
+
+  const infoItemVariants = {
+    hidden: { opacity: 0, y: 16 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
+  const mainAnimationProps = animationsEnabled
+    ? { variants: mainVariants, initial: 'hidden', animate: 'visible' }
+    : { initial: false, animate: false };
 
   return (
     <section className="homee">
       {/* RenderEnv caricato SOLO su desktop */}
-      {isDesktop && <RenderEnvDesktop />}
+      {!shouldReduceMotion && isDesktop && <RenderEnvDesktop />}
 
       <section className="section-standard" id="home" ref={scrollRef}>
-        <div className="main-contnet">
-          <div className="home-menu">
+        <motion.div className="main-contnet" {...mainAnimationProps}>
+          <motion.div className="home-menu" variants={blockVariants}>
             <Link href="/">kowi</Link>
             <Link href="/archive">archive</Link>
-            <Link href="/">contact</Link>
-          </div>
+            <Link href="/contact">contact</Link>
+          </motion.div>
 
-          <div className="title-home">
+          <motion.div className="title-home" variants={blockVariants}>
             <Logo className="logo" aria-label="Brand logo" />
-          </div>
+          </motion.div>
 
-          <div className="info">
-            <div className="slot">
-              <span> antonio amodio</span>
-              <span> 04 / 08 / 2004</span>
-              <span>.</span>
-            </div>
-            <div className="slot ct">
-              <span> creative coder</span>
-              <span> graphic designer</span>
-              <span> musician</span>
-            </div>
-            <div className="slot rg">
-              <span> born in naples</span>
-              <span> based in modena</span>
-              <span>.</span>
-            </div>
-          </div>
-        </div>
+          <motion.div className="info" variants={infoContainerVariants}>
+            {infoSlots.map((slot, index) => (
+              <motion.div
+                key={index}
+                className={`slot${index === 1 ? ' ct' : index === 2 ? ' rg' : ''}`}
+                variants={infoItemVariants}
+              >
+                {slot.map((text, spanIdx) => (
+                  <span key={spanIdx}>{text}</span>
+                ))}
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
       </section>
     </section>
   );
