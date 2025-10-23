@@ -146,6 +146,7 @@ export default function Home() {
         <motion.div className="main-contnet" {...mainAnimationProps}>
           <motion.div className="home-menu" variants={blockVariants}>
             <Link href="/">kowi</Link>
+            <Link href="/about">about</Link>
             <Link href="/archive">archive</Link>
             <Link href="/contact">contact</Link>
           </motion.div>

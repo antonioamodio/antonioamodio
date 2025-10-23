@@ -12,20 +12,14 @@ export default function Menu() {
     </Link>
   );
 
-  const renderHashLink = (href, label) => {
-    return (
-      <a key={href} href={href}>
-        {label}
-      </a>
-    );
-  };
-
   return (
     <section className="menu">
       <div />
       <div />
       <div className="link">
-        {renderHashLink('#about', 'About')}
+        {pathname === '/about'
+          ? renderLink('/', 'Home')
+          : renderLink('/about', 'About')}
 
         {pathname === '/archive'
           ? renderLink('/', 'Home')
